@@ -105,7 +105,7 @@
     display: flex;
     align-items: center;
     gap: 16px;
-    margin-bottom: 20px; /* Уменьшили отступ, чтобы влезло больше полей */
+    margin-bottom: 20px; 
     animation: fadeUp 0.7s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
@@ -474,6 +474,7 @@
 
     <input type="text" name="name" placeholder="Ваше имя" required>
     <input type="tel" name="phone" placeholder="Телефон" required>
+    <input type="email" name="email" placeholder="Электронная почта (необязательно)">
     
     <input type="text" name="city" placeholder="Населённый пункт" required>
     <input type="text" name="address" placeholder="Адрес (улица, дом/цех)" required>
@@ -490,6 +491,7 @@
     <input type="hidden" name="form_type" value="Запрос обратного звонка">
     <input type="hidden" name="to_email" value="site@co-2-service.ru">
     <input type="hidden" name="message" value="Клиент просит перезвонить">
+    <input type="hidden" name="email" value="Не указана">
     <input type="hidden" name="city" value="Не указан">
     <input type="hidden" name="address" value="Не указан">
     <input type="hidden" name="date" value="Не указана">
@@ -544,7 +546,6 @@
       statusEl.style.color = 'var(--accent)'; 
       form.reset();
       
-      // Возвращаем поле даты в исходное состояние (текст), если форма сбросилась
       const dateInput = form.querySelector('input[name="date"]');
       if(dateInput) dateInput.type = 'text';
 
