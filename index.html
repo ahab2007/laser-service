@@ -119,6 +119,8 @@
   }
 
   .tab-home { background-color: #e8e8ec; }
+  .tab-knowledge { background-color: #59596a; }
+  .tab-knowledge span { color: #fff; }
   .tab-about { background-color: #9090e8; }
   .tab-about span { color: #fff; }
 
@@ -242,111 +244,81 @@
   .btn:disabled { opacity: 0.6; cursor: wait; }
   .form-status { font-size: 13px; text-align: center; margin-top: 10px; min-height: 20px; }
 
-  /* ================= СТИЛИ О НАС ================= */
+  /* Стили О Нас */
   .about-title { font-size: 18px; font-weight: 800; margin-bottom: 12px; color: var(--text); letter-spacing: -0.3px;}
   .about-text { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 16px; }
   .about-text strong { color: var(--text); }
   .about-text a { color: var(--accent); text-decoration: none; font-weight: 600; transition: opacity 0.2s; }
   .about-text a:hover { opacity: 0.8; text-decoration: underline; }
   
-  .achievement-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-bottom: 25px;
-  }
-  .achievement-card {
-    background: #0e0e12;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 16px;
-    transition: border-color 0.3s;
-  }
-  .achievement-card:hover { border-color: var(--accent); }
+  .achievement-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
+  .achievement-card { background: #0e0e12; border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
   .achievement-icon { font-size: 20px; margin-bottom: 8px; }
   .achievement-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
   .achievement-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
 
   .course-box {
     background: linear-gradient(135deg, rgba(144, 144, 232, 0.1), rgba(144, 144, 232, 0.02));
-    border: 1px solid var(--accent);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 25px;
-    position: relative;
-    overflow: hidden;
+    border: 1px solid var(--accent); border-radius: 12px; padding: 20px; margin-bottom: 25px; position: relative;
   }
-  .course-box::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 4px; height: 100%;
-    background: var(--accent);
-  }
+  .course-box::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent); }
   .course-box .about-title { color: var(--accent); font-size: 16px; margin-bottom: 8px; }
   .course-tags { display: flex; gap: 8px; margin-top: 15px; flex-wrap: wrap; }
-  .course-tag {
-    background: #0a0a0c;
-    border: 1px solid var(--line);
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text);
-  }
+  .course-tag { background: #0a0a0c; border: 1px solid var(--line); padding: 5px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; color: var(--text); }
 
-  /* Галерея с реальными фото */
-  .gallery { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    gap: 15px; 
-    margin-top: 15px; 
+  .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+  .gallery-item { background: #0e0e12; border: 1px solid var(--line); border-radius: 10px; aspect-ratio: 4 / 3; overflow: hidden; }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* ================= СТИЛИ БАЗЫ ЗНАНИЙ ================= */
+  .kb-accordion { display: flex; flex-direction: column; gap: 10px; }
+  .kb-item { background: #0e0e12; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; transition: border-color 0.3s; }
+  .kb-item:hover { border-color: rgba(144, 144, 232, 0.5); }
+  
+  .kb-header {
+    padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer; font-weight: 600; font-size: 14px; color: var(--text); user-select: none;
+  }
+  .kb-header:hover { background: #121216; }
+  .kb-icon { transition: transform 0.3s; font-size: 12px; color: var(--accent); }
+  
+  .kb-content {
+    max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding 0.4s ease;
+    padding: 0 20px; font-size: 13px; color: var(--muted); line-height: 1.6;
+    border-top: 1px solid transparent;
   }
   
-  .gallery-item {
-    background: #0e0e12; 
-    border: 1px solid var(--line); 
-    border-radius: 10px;
-    height: 220px; 
-    overflow: hidden; 
-    position: relative;
-    transition: border-color 0.3s, transform 0.3s;
-    cursor: zoom-in; /* Курсор для лайтбокса */
-  }
-  
-  .gallery-item:hover {
-    border-color: var(--accent);
-    transform: translateY(-3px);
+  .kb-item.active { border-color: var(--accent); }
+  .kb-item.active .kb-icon { transform: rotate(180deg); }
+  .kb-item.active .kb-content {
+    max-height: 3500px;
+    padding: 15px 20px 20px; 
+    border-top-color: var(--line);
   }
 
-  .gallery-item img {
+  .kb-content p { margin-bottom: 10px; }
+  .kb-content ul { margin-left: 20px; margin-bottom: 10px; }
+  .kb-content li { margin-bottom: 5px; }
+  .kb-content strong { color: var(--text); }
+
+  /* Сетка для фотографий внутри базы знаний */
+  .kb-images-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin: 15px 0;
+  }
+
+  .kb-images-grid img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid var(--line);
     display: block;
+    transition: opacity 0.2s;
   }
 
-  /* ================= СТИЛИ ЛАЙТБОКСА ================= */
-  .lightbox {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.9);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
-    padding: 20px;
-    cursor: zoom-out;
-    animation: fadeUp 0.25s ease;
-  }
-  .lightbox.open { display: flex; }
-  .lightbox img {
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 12px;
-    box-shadow: 0 0 40px rgba(144,144,232,0.35);
-    object-fit: contain;
-  }
+  .kb-images-grid img:hover { opacity: 0.9; cursor: zoom-in; }
 
   @media (max-width: 900px) {
     .site-wrapper { flex-direction: column; max-width: 440px; margin-right: 0; }
@@ -356,7 +328,6 @@
     .tab.active { transform: translateY(5px) scale(1.02); box-shadow: 0 5px 15px rgba(144,144,232,0.2); }
     .card { padding: 30px 22px 24px; }
     .gallery { grid-template-columns: 1fr; }
-    .gallery-item { height: 250px; }
     .achievement-grid { grid-template-columns: 1fr; }
   }
 </style>
@@ -365,9 +336,13 @@
 
 <div class="site-wrapper">
 
+  <!-- ВКЛАДКИ (порядок изменен) -->
   <div class="notebook-tabs">
     <div class="tab tab-home active" data-target="page-home">
       <span>Услуги</span>
+    </div>
+    <div class="tab tab-knowledge" data-target="page-knowledge">
+      <span>База знаний</span>
     </div>
     <div class="tab tab-about" data-target="page-about">
       <span>О нас</span>
@@ -376,7 +351,7 @@
 
   <div class="card">
     
-    <!-- ГЛАВНАЯ СТРАНИЦА -->
+    <!-- СТРАНИЦА 1: УСЛУГИ -->
     <div id="page-home" class="page-content active">
       <div class="header">
         <div class="logo">
@@ -453,7 +428,380 @@
       <p id="form-status" class="form-status"></p>
     </div>
 
-    <!-- СТРАНИЦА О НАС -->
+    <!-- СТРАНИЦА 2: БАЗА ЗНАНИЙ -->
+    <div id="page-knowledge" class="page-content">
+      <div class="header">
+        <div class="logo">
+          <svg viewBox="0 0 24 24">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="title">База знаний</h1>
+          <p class="subtitle">Полезные статьи и мануалы</p>
+        </div>
+      </div>
+
+      <p class="desc">Здесь собраны ответы на самые частые вопросы по настройке, диагностике и ремонту CO₂-лазерных станков.</p>
+
+      <div class="kb-accordion">
+        
+        <!-- 1 -->
+        <div class="kb-item">
+          <div class="kb-header">
+            <span>1. Как настроить чиллер</span>
+            <span class="kb-icon">▼</span>
+          </div>
+          <div class="kb-content">
+            <p>Настройка чиллера — неотъемлемый шаг для обеспечения эффективной и долгосрочной работы системы охлаждения. В этой статье мы рассмотрим, как правильно настроить чиллеры различных моделей от компании TEYU.</p>
+            <p><strong>Настройка чиллеров CW-5000, CW-5200 и CW-5202 (контроллеры T-503D, T-503E, T-504D)</strong></p>
+            <ul>
+              <li><strong>Доступ к настройкам:</strong> Нажмите и удерживайте клавиши SET и ▲ несколько секунд. Система запросит ввод пароля.</li>
+              <li><strong>Ввод пароля:</strong> Используя клавиши ▲ и ▼, установите значение "8" и подтвердите нажатием SET.</li>
+              <li><strong>Переключение режима:</strong> Переключитесь с "умного режима" в режим поддержания температуры. Выберите параметр F3, нажмите SET, установите значение "0" и подтвердите.</li>
+              <li><strong>Установка температуры:</strong> Выберите параметр F0, нажмите SET, установите нужное значение и подтвердите.</li>
+              <li><strong>Установка отклонения:</strong> Выберите параметр F2, нажмите SET, установите желаемое значение разности температур и подтвердите.</li>
+              <li><strong>Сохранение:</strong> Нажмите SET и выйдите из настроек, нажав RST.</li>
+            </ul>
+            <p><strong>Восстановление заводских настроек:</strong> Нажмите и удерживайте ▲ и ▼ до появления надписи «rE».</p>
+            <p><em>Пример:</em> Если F0 = 19℃ и F2 = 2℃, то при достижении 21℃ чиллер начнет охлаждать систему до 19℃. Рекомендуется устанавливать F2 в несколько градусов, чтобы компрессор имел возможность для "отдыха".</p>
+            <p>Для моделей CW-5300, CW-6000, CW-6100, CW-6200 (T-506D, T-506E), CW-6300 (T-804A, T-804B), RMUP-300, RMUP-500 (T-801B) и CWFL-1000, CWFL-1500 (T-607) алгоритм схож, но могут отличаться кнопки навигации и пароли (например, 359 для T-804 и T-801).</p>
+            
+            <div class="kb-images-grid">
+              <img src="images/1-1.jpg" alt="Фото 1">
+              <img src="images/1-2.jpg" alt="Фото 2">
+              <img src="images/1-3.jpg" alt="Фото 3">
+              <img src="images/1-4.jpg" alt="Фото 4">
+              <img src="images/1-5.jpg" alt="Фото 5">
+              <img src="images/1-6.jpg" alt="Фото 6">
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="kb-item">
+          <div class="kb-header">
+            <span>2. Слишком большая ширина луча</span>
+            <span class="kb-icon">▼</span>
+          </div>
+          <div class="kb-content">
+            <p>Изменение ширины луча может происходить постепенно или внезапно. Слишком большая ширина при гравировке приводит к потере мелких деталей, а при резке — к люфтам и зазорам. Основные причины:</p>
+            <ul>
+              <li>Загрязнения на линзе, зеркалах или выходном зеркале трубки. Регулярно очищайте оптику сжатым воздухом и безворсовой салфеткой с изопропиловым спиртом.</li>
+              <li>Материал расположен не в фокусной точке (расфокусировка). Отрегулируйте положение головки или стола.</li>
+              <li>Слишком большая мощность во время резки. Подберите правильное соотношение скорости и мощности.</li>
+              <li>Слабый обдув, приводящий к оплавлению материала. Обеспечьте достаточное давление.</li>
+              <li>Нарушение положения зеркала в лазерной головке (луч задевает сопло).</li>
+              <li>Линза установлена неправильно. Собирающая линза должна быть выпуклой стороной вверх.</li>
+              <li>Фокусное расстояние линзы не соответствует тубусу.</li>
+              <li>Установлена длиннофокусная линза (у нее пятно больше, но зона каустики шире).</li>
+              <li>Перекос стола или деформация направляющих.</li>
+            </ul>
+            <div class="kb-images-grid">
+              <img src="images/2-1.jpg" alt="Фото 1">
+              <img src="images/2-2.jpg" alt="Фото 2">
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="kb-item">
+          <div class="kb-header">
+            <span>3. Куда устанавливать миллиамперметр в CO₂-станке?</span>
+            <span class="kb-icon">▼</span>
+          </div>
+          <div class="kb-content">
+            <p>Миллиамперметр постоянного тока необходим для измерения силы тока во время работы излучателя. Он устанавливается в <strong>разрыв низковольтного провода</strong>, ведущего от наконечника лазерной трубки к блоку розжига (высоковольтному блоку питания).</p>
+            <p>Простой аналоговый миллиамперметр имеет два контакта: один соединяется с отрицательным электродом (катодом) трубки, другой — с отрицательным контактом блока розжига. Если стрелка отклоняется влево (в минус), поменяйте контакты местами.</p>
+            <div class="kb-images-grid">
+              <img src="images/3-1.jpg" alt="Фото 1">
+              <img src="images/3-2.jpg" alt="Фото 2">
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="kb-item">
+          <div class="kb-header">
+            <span>4. Как определить фокусное расстояние / приехали не те линзы</span>
+            <span class="kb-icon">▼</span>
+          </div>
+          <div class="kb-content">
+            <p>Тубусы лазерных головок рассчитаны под линзы с определенным фокусным расстоянием. Проверить линзу можно так: вертикально поставьте линейку на стол, держите линзу над столом, поднимите фонарик на высоту ~60 см над линзой и перемещайте линзу вверх-вниз.</p>
+            <p>Высота от линзы до стола, при которой свет фокусируется в минимальное пятно, и есть фокусное расстояние линзы. При неправильной линзе луч фокусируется некорректно, и часть излучения попадает на сопло, разогревая его.</p>
+            <div class="kb-images-grid">
+              <img src="images/4-1.jpg" alt="Фото 1">
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="kb-item">
+          <div class="kb-header">
+            <span>5. Упала мощность лазера / перестала прорезать материал</span>
+            <span class="kb-icon">▼</span>
+          </div>
+          <div class="kb-content">
+            <p>Причины могут быть разными:</p>
+            <ul>
+              <li><strong>Нарушение траектории луча (юстировка):</strong> Углы зеркал могут сбиваться от вибраций. Проверяйте юстировку по 4 углам и в центре стола.</li>
+              <li><strong>Загрязнение и износ оптики:</strong> Пыль и продукты горения рассеивают излучение. Очищайте изопропиловым спиртом и микрофиброй.</li>
+              <li><strong>Деградация газовой смеси:</strong> Со временем трубка теряет мощность (до 5-10% в год даже в неактивном состоянии).</li>
+              <li><strong>Загрязнение охлаждающей жидкости:</strong> Используйте только дистиллированную воду, меняйте раз в 2-3 месяца.</li>
+              <li><strong>Загрязнение поверхности трубки:</strong> Снижает эффективность охлаждения и копит статику.</li>
+              <li><strong>Нарушения в работе охлаждения:</strong> Рабочая температура трубки 17–21ºС. Проверьте помпу и чиллер.</li>
+              <li><strong>Повышение температуры в помещении:</strong> Увеличивает нагрузку на систему охлаждения.</li>
+              <li><strong>Нарушения в работе блока розжига:</strong> Естественное старение компонентов.</li>
+              <li><strong>Снижение напряжения сети:</strong> Используйте стабилизатор с запасом мощности минимум 15%.</li>
+              <li><strong>Нарушение работы вытяжки и обдува:</strong> Скопление продуктов горения снижает мощность.</li>
+            </ul>
+            <div class="kb-images-grid">
+              <img src="images/5-1.jpg" alt="Фото 1">
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="kb-item">
+          <div class="kb-header">
+            <span>6. Как определить поломку лазерной трубки или блока розжига?</span>
+            <span class="kb-icon">▼</span>
+          </div>
+          <div class="kb-content">
+            <p>Если внезапно пропал луч: выключите станок, подождите 10–15 минут, осмотрите трубку на повреждения и проверьте соединения. Если визуально всё целое:</p>
+            <ul>
+              <li>Включите станок, установите мощность 80% и нажмите «Pulse». Если луча нет — переходим к ВБП.</li>
+              <li>Проверьте, вращается ли вентилятор ВБП, горят ли индикаторы.</li>
+              <li>Отключите широкую управляющую клемму (TH-TL-WP-G-IN-5V). Нажмите кнопку «TEST» на ВБП. Если миллиамперметр показывает 0, а звук ВБП меняется — скорее всего, проблема в трубке.</li>
+              <li>Замкните контакты IN и 5V (имитация 100% мощности) и нажмите TEST. Если трубка не разожглась — она требует замены.</li>
+              <li>Если трубка разожглась — проблема в датчике протока или контроллере.</li>
+            </ul>
+            <p><strong>Тест «на искру» (ВБП):</strong> Осторожно! Высокое напряжение. Извлеките блок, закрепите провода на расстоянии 1 см друг от друга, замкните IN и 5V, нажмите TEST. Если дуга пробивает 1 см — блок выдает ~10 кВ. Увеличивайте расстояние на 5–10 мм, чтобы понять, соответствует ли напряжение номиналу (до 45 кВ).</p>
+            <div class="kb-images-grid">
+              <img src="images/6-1.jpg" alt="Фото 1">
+              <img src="images/6-2.jpg" alt="Фото 2">
+            </div>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="kb-item">
+          <div class="kb-header">
+            <span>7. Резко упала мощность трубки во время работы</span>
+            <span class="kb-icon">▼</span>
+          </div>
+          <div class="kb-content">
+            <ul>
+              <li><strong>Износ/прогар полупрозрачного зеркала, зеркал или линзы:</strong> Замена оптики или чистка.</li>
+              <li><strong>Отсутствие юстировки:</strong> Проведите юстировку заново.</li>
+              <li><strong>Перегрев трубки:</strong> Проверьте систему охлаждения, удалите воздушные пробки.</li>
+              <li><strong>Проблемы с источником питания:</strong> Замените ВБП на рабочий.</li>
+              <li><strong>Попадание посторонних объектов:</strong> Удалите всё, что мешает лучу.</li>
+              <li><strong>Падение напряжения в сети:</strong> Установите стабилизатор (погрешность до 3%, время срабатывания до 20 мс).</li>
+            </ul>
+            <div class="kb-images-grid">
+              <img src="images/7-1.jpg" alt="Фото 1">
+              <img src="images/7-2.jpg" alt="Фото 2">
+            </div>
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="kb-item">
+          <div class="kb-header">
+            <span>8. Подойдет ли данный блок питания к лазерной трубке?</span>
+            <span class="kb-icon">▼</span>
+          </div>
+          <div class="kb-content">
+            <p>Высоковольтный блок питания (ВБП) преобразует напряжение сети в высокое для розжига трубки. Основные характеристики для подбора: <strong>максимальная выходная сила тока</strong> и <strong>максимальное напряжение</strong>.</p>
+            <ul>
+              <li>Ток ВБП должен соответствовать рабочему току трубки (лучше с запасом 2-8 мА).</li>
+              <li>Напряжение ВБП должно соответствовать напряжению розжига трубки (запас 3-10 кВ).</li>
+              <li>Ток регулируется подстроечным резистором под отвертку.</li>
+              <li>Стандартные серии: DY, T, TA, XA, WA. «Умные» серии (ESA, Z) надежнее: имеют фильтр помех, не копят остаточное напряжение, могут подключаться к RuiDa.</li>
+              <li>Кнопка «TEST» позволяет проверить розжиг в обход контроллера (выходной ток ~40% от максимума).</li>
+            </ul>
+            <div class="kb-images-grid">
+              <img src="images/8-1.jpg" alt="Фото 1">
+              <img src="images/8-2.jpg" alt="Фото 2">
+              <img src="images/8-3.jpg" alt="Фото 3">
+              <img src="images/8-4.jpg" alt="Фото 4">
+            </div>
+          </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="kb-item">
+          <div class="kb-header">
+            <span>9. Правила и порядок обслуживания лазерных CO₂ трубок</span>
+            <span class="kb-icon">▼</span>
+          </div>
+          <div class="kb-content">
+            <ul>
+              <li>Лазерный луч CO2 невидим — используйте защитные очки!</li>
+              <li>Регулярно осматривайте выходное зеркало трубки на загрязнения. Чистите сжатым воздухом или изопропиловым спиртом с безворсовой салфеткой. Не используйте ватные палочки.</li>
+              <li>Осматривайте электрические соединения, удаляйте загрязнения сжатым воздухом при отключенном питании.</li>
+              <li>Используйте только дистиллированную воду для охлаждения.</li>
+              <li>Удаляйте воздушные пузыри из контура охлаждения.</li>
+              <li>Меняйте воду каждые 2-4 месяца.</li>
+              <li>Сила тока блока розжига не должна превышать рабочий ток трубки.</li>
+              <li>При эксплуатации лазеров COLT RX не крутите юстировочные винты на наконечнике.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="kb-item">
+          <div class="kb-header">
+            <span>10. Диодный станок стучит во время перемещений (регулировка ремней)</span>
+            <span class="kb-icon">▼</span>
+          </div>
+          <div class="kb-content">
+            <p>Стук возникает из-за проскальзывания ремней на шкивах из-за слабого натяжения. Ось X имеет один ремень, ось Y — два.</p>
+            <p><strong>Регулировка:</strong> Убедитесь, что портал не перекошен. Натяните ремни (винтами или вручную, в зависимости от модели). Проверьте тестовым резом квадратов и окружностей — если геометрия нарушена, отрегулируйте натяжение сильнее. При сохраняющихся люфтах отрегулируйте эксцентрики (шестигранные гайки на колесах).</p>
+            <div class="kb-images-grid">
+              <img src="images/10-1.jpg" alt="Фото 1">
+              <img src="images/10-2.jpg" alt="Фото 2">
+              <img src="images/10-3.jpg" alt="Фото 3">
+              <img src="images/10-4.jpg" alt="Фото 4">
+              <img src="images/10-5.jpg" alt="Фото 5">
+            </div>
+          </div>
+        </div>
+
+        <!-- 11 -->
+        <div class="kb-item">
+          <div class="kb-header">
+            <span>11. Для чего нужен стабилизатор напряжения и как его выбрать?</span>
+            <span class="kb-icon">▼</span>
+          </div>
+          <div class="kb-content">
+            <p>Стабилизатор корректирует выходное напряжение и защищает от скачков. Для промышленного оборудования важны:</p>
+            <ul>
+              <li><strong>Мощность:</strong> Должна превышать суммарное потребление на 20-30%. Подключайте только станок, чиллер и вытяжку — отдельно.</li>
+              <li><strong>Погрешность:</strong> Не более 3%.</li>
+              <li><strong>Диапазон входного напряжения:</strong> Должен соответствовать вашей сети.</li>
+              <li><strong>Время срабатывания:</strong> Не более 20 мс.</li>
+            </ul>
+            <p><strong>Типы:</strong> Релейные (погрешность 5-10%, шумят), электронные (3-10%), электромеханические (2-3%, плавная регулировка — оптимальны для станков), инверторные (до 2%, дорогие).</p>
+          </div>
+        </div>
+
+        <!-- 12 -->
+        <div class="kb-item">
+          <div class="kb-header">
+            <span>12. Как подключить блок HY-Z к контроллеру RuiDa?</span>
+            <span class="kb-icon">▼</span>
+          </div>
+          <div class="kb-content">
+            <p>Блок HY-Z (LaserPWR) подключается к разъему «RTLink» материнской платы RuiDa. Это позволяет отслеживать ток и напряжение на дисплее контроллера, а также видеть ошибки.</p>
+            <p>После подключения в программе RDWorks зайдите в «Заводские настройки» (пароль RD8888), нажмите «Считать», в разделе «Лазер» -> «Настройки станка» поставьте галочку «Показать данные с БВН Лазера», нажмите «Записать» и перезагрузите контроллер.</p>
+            <div class="kb-images-grid">
+              <img src="images/12-1.jpg" alt="Фото 1">
+            </div>
+          </div>
+        </div>
+
+        <!-- 13 -->
+        <div class="kb-item">
+          <div class="kb-header">
+            <span>13. Почему ремни нужно менять сразу все?</span>
+            <span class="kb-icon">▼</span>
+          </div>
+          <div class="kb-content">
+            <p>Ремни имеют зубчатую поверхность и кордовый сердечник. Из-за износа, натяжения и температуры они растягиваются. Новый ремень будет отличаться по эластичности от старого, что вызовет рассинхронизацию приводов (особенно на осях с двумя ремнями). Поэтому при износе одного ремня меняют весь комплект.</p>
+            <div class="kb-images-grid">
+              <img src="images/13-1.jpg" alt="Фото 1">
+              <img src="images/13-2.jpg" alt="Фото 2">
+              <img src="images/13-3.jpg" alt="Фото 3">
+              <img src="images/13-4.jpg" alt="Фото 4">
+            </div>
+          </div>
+        </div>
+
+        <!-- 14 -->
+        <div class="kb-item">
+          <div class="kb-header">
+            <span>14. Неправильная мода: что делать?</span>
+            <span class="kb-icon">▼</span>
+          </div>
+          <div class="kb-content">
+            <p>Мода луча — это форма пучка света. Обычно используется мода низшего порядка (TEM00), так как она имеет наименьшую расходимость и фокусируется в узкую точку. Нарушение моды (например, после замены трубки или юстировки) приводит к неравномерному резу. Для исправления требуется проверка соосности всех элементов оптического тракта.</p>
+          </div>
+        </div>
+
+        <!-- 15 -->
+        <div class="kb-item">
+          <div class="kb-header">
+            <span>15. Ошибка Е6 и Е7 на чиллерах TEYU (S&A)</span>
+            <span class="kb-icon">▼</span>
+          </div>
+          <div class="kb-content">
+            <p>Ошибка E6 связана с перегрузкой компрессора, E7 — с проблемой датчика температуры. Алгоритм решения:</p>
+            <ul>
+              <li>Проверьте подключение воды (шланги не должны быть перегнуты).</li>
+              <li>Замените воду в системе, удалите воздух. Используйте дистиллированную воду (можно с пропиленгликолем).</li>
+              <li>Проверьте электропроводку и питание.</li>
+              <li>Проверьте датчики (пережмите шланг, снимите датчик температуры).</li>
+              <li>Проверьте помпу (должна быть вибрация).</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 16 -->
+        <div class="kb-item">
+          <div class="kb-header">
+            <span>16. Как настроить блок розжига и цифровой миллиамперметр?</span>
+            <span class="kb-icon">▼</span>
+          </div>
+          <div class="kb-content">
+            <p>Клеммы ВБП: AC (питание), FG (заземление), L/H (уровни), WP (защита потока), G (земля), IN (модуляция 0-5В), 5V.</p>
+            <p><strong>Настройка:</strong></p>
+            <ul>
+              <li>Соберите управляющую колодку.</li>
+              <li>Подключите питание ВБП. Пока управляющая колодка не подключена, блок в тестовом режиме (ток 50%).</li>
+              <li>Подключите толстый красный провод к аноду, тонкий черный — к катоду трубки.</li>
+              <li>Проверьте розжиг кнопкой «TEST».</li>
+              <li>На контроллере установите 80% мощности. Зажмите Pulse и посмотрите ток. Регулируйте подстроечным резистором на ВБП до рабочего значения трубки (например, 24 мА для Reci T2).</li>
+            </ul>
+            <p><strong>Цифровой миллиамперметр:</strong> Блоки LaserPWR с буквой «A» (TA, XA, ESA) имеют разъем RJ-45 для подключения. Соедините комплектным проводом.</p>
+            <div class="kb-images-grid">
+              <img src="images/16-1.jpg" alt="Фото 1">
+              <img src="images/16-2.jpg" alt="Фото 2">
+              <img src="images/16-3.jpg" alt="Фото 3">
+              <img src="images/16-4.jpg" alt="Фото 4">
+            </div>
+          </div>
+        </div>
+
+        <!-- 17 -->
+        <div class="kb-item">
+          <div class="kb-header">
+            <span>17. Как включить вентиляцию и свет на корпусе Ortur?</span>
+            <span class="kb-icon">▼</span>
+          </div>
+          <div class="kb-content">
+            <p>Функции корпуса Ortur Enclosure 2.0 активируются через приложение Laser Explorer App (Wi-Fi) или веб-интерфейс.</p>
+            <p><strong>Через приложение:</strong> Подключите станок по Wi-Fi (2.4 ГГц), нажмите 5 раз кнопку Power для активации, подтвердите соединение.</p>
+            <p><strong>Через веб-интерфейс:</strong> Подключите станок по USB, в LightBurn в консоли введите команды $74, $75, $WRS для получения IP-адреса. Введите IP в браузере (логин admin, пароль admin).</p>
+          </div>
+        </div>
+
+        <!-- 18 -->
+        <div class="kb-item">
+          <div class="kb-header">
+            <span>18. Чем промывать лазерные трубки и чиллеры?</span>
+            <span class="kb-icon">▼</span>
+          </div>
+          <div class="kb-content">
+            <p>Для промывки чиллеров и контуров охлаждения используйте специальные средства или дистиллированную воду. Не допускайте застоя воды и цветения. Регулярно меняйте теплоноситель (раз в 2-4 месяца) и промывайте систему при появлении загрязнений.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- СТРАНИЦА 3: О НАС -->
     <div id="page-about" class="page-content">
       <div class="header">
         <div class="logo">
@@ -481,7 +829,7 @@
         <div class="achievement-card">
           <div class="achievement-icon">⚙️</div>
           <div class="achievement-title">Ведущий инженер</div>
-          <div class="achievement-desc">Опыт решения нестандартных задач в Torden (torden.ru).</div>
+          <div class="achievement-desc">Опыт решения нестандартных задач в Torden.</div>
         </div>
         <div class="achievement-card">
           <div class="achievement-icon">🚀</div>
@@ -491,7 +839,7 @@
       </div>
 
       <p class="about-text">
-        Сейчас я запускаю свой отдельный проект — профессиональную пусконаладку CO₂-лазерных станков в Санкт-Петербурге и Ленинградской области. Моя цель — сделать так, чтобы ваше оборудование работало идеально с первого дня.
+        Сейчас я запускаю свой отдельный проект — профессиональную пусконаладку CO₂-лазерных станков в Санкт-Петербурге и Ленинградской области.
       </p>
 
       <div class="course-box">
@@ -500,34 +848,22 @@
           Параллельно я записываю масштабный цикл обучающих роликов. От простой юстировки до ремонта и диагностики высоковольтных блоков розжига.
         </p>
         <p class="about-text" style="margin-bottom: 0;">
-          Этот курс создан специально для инженеров из дальних регионов, где я не могу провести обучение физически. 
-          Платформы: Boosty и Patreon.
+          Курс создан для инженеров из дальних регионов. Платформы: Boosty и Patreon.
         </p>
         <div class="course-tags">
           <span class="course-tag">Boosty</span>
           <span class="course-tag">Patreon</span>
           <span class="course-tag">Обучение</span>
-          <span class="course-tag">Ремонт электроники</span>
         </div>
       </div>
 
       <div class="about-title" style="font-size: 15px; margin-top: 20px;">📸 Рабочие моменты</div>
       <div class="gallery">
-        <!-- Фото 1 (с ноутбуком у станка) -->
         <div class="gallery-item">
-          <img src="images/photo1.jpg" alt="Настройка станка с ноутбуком" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=600&auto=format&fit=crop" alt="Настройка">
         </div>
-        <!-- Фото 2 (с ноутбуком втроем) -->
         <div class="gallery-item">
-          <img src="images/photo2.jpg" alt="Обсуждение настроек" loading="lazy">
-        </div>
-        <!-- Фото 3 (на фоне Axiom) -->
-        <div class="gallery-item">
-          <img src="images/photo3.jpg" alt="Станкокомплект Axiom" loading="lazy">
-        </div>
-        <!-- Фото 4 (открытая крышка станка) -->
-        <div class="gallery-item">
-          <img src="images/photo4.jpg" alt="Юстировка оптики" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1565514020179-026b92b84bb6?q=80&w=600&auto=format&fit=crop" alt="Axiom">
         </div>
       </div>
     </div>
@@ -535,13 +871,8 @@
   </div>
 </div>
 
-<!-- Лайтбокс для увеличения фото -->
-<div class="lightbox" id="lightbox">
-  <img src="" alt="Просмотр фото">
-</div>
-
 <script>
-  // Переключение вкладок (Услуги / О нас)
+  // --- Логика переключения главных вкладок ---
   const tabs = document.querySelectorAll('.tab');
   const pages = document.querySelectorAll('.page-content');
 
@@ -556,7 +887,19 @@
     });
   });
 
-  // EmailJS
+  // --- Логика аккордеона "База знаний" ---
+  const kbHeaders = document.querySelectorAll('.kb-header');
+  kbHeaders.forEach(header => {
+    header.addEventListener('click', () => {
+      const item = header.parentElement;
+      document.querySelectorAll('.kb-item').forEach(i => {
+        if (i !== item) i.classList.remove('active');
+      });
+      item.classList.toggle('active');
+    });
+  });
+
+  // --- Логика EmailJS ---
   emailjs.init("ouBg_eyDA9g5EEWYU");
   const SERVICE_ID  = "service_6c3u9bo";
   const TEMPLATE_ID = "template_kyd08dh";
@@ -575,7 +918,6 @@
       formRequest.style.display  = tab === 'request'  ? 'grid' : 'none';
       formCallback.style.display = tab === 'callback' ? 'grid' : 'none';
       statusEl.textContent = '';
-      statusEl.style.color = '';
     });
   });
 
@@ -588,20 +930,17 @@
     btn.disabled = true;
     btn.textContent = 'Отправка...';
     statusEl.textContent = '';
-    statusEl.style.color = '';
 
     try {
       await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form);
-      statusEl.textContent = '✅ Отправлено! Я свяжусь с вами в ближайшее время.';
+      statusEl.textContent = '✅ Отправлено! Я свяжусь с вами.';
       statusEl.style.color = 'var(--accent)'; 
       form.reset();
-      
       const dateInput = form.querySelector('input[name="date"]');
       if(dateInput) dateInput.type = 'text';
-
     } catch (err) {
       console.error('EmailJS error:', err);
-      statusEl.textContent = '❌ Не удалось отправить. Позвоните: +7 (952) 097-60-60';
+      statusEl.textContent = '❌ Ошибка отправки. Позвоните нам.';
       statusEl.style.color = '#ff6b6b';
     } finally {
       btn.disabled = false;
@@ -611,32 +950,6 @@
 
   formRequest.addEventListener('submit', handleSubmit);
   formCallback.addEventListener('submit', handleSubmit);
-
-  // Лайтбокс (увеличение фото)
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = lightbox.querySelector('img');
-
-  document.querySelectorAll('.gallery-item img').forEach(img => {
-    img.addEventListener('click', () => {
-      lightboxImg.src = img.src;
-      lightboxImg.alt = img.alt;
-      lightbox.classList.add('open');
-    });
-  });
-
-  // Закрытие по клику
-  lightbox.addEventListener('click', () => {
-    lightbox.classList.remove('open');
-    lightboxImg.src = '';
-  });
-
-  // Закрытие по Escape
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && lightbox.classList.contains('open')) {
-      lightbox.classList.remove('open');
-      lightboxImg.src = '';
-    }
-  });
 </script>
 
 </body>
