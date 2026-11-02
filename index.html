@@ -266,21 +266,8 @@
   .course-tags { display: flex; gap: 8px; margin-top: 15px; flex-wrap: wrap; }
   .course-tag { background: #0a0a0c; border: 1px solid var(--line); padding: 5px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; color: var(--text); }
 
-  /* Галерея (4 фото) */
-  .gallery { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    gap: 15px; 
-    margin-top: 15px; 
-  }
-  .gallery-item { 
-    background: #0e0e12; 
-    border: 1px solid var(--line); 
-    border-radius: 10px; 
-    aspect-ratio: 4 / 3; 
-    overflow: hidden; 
-    transition: border-color 0.3s;
-  }
+  .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+  .gallery-item { background: #0e0e12; border: 1px solid var(--line); border-radius: 10px; aspect-ratio: 4 / 3; overflow: hidden; transition: border-color 0.3s; }
   .gallery-item:hover { border-color: var(--accent); }
   .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
@@ -480,11 +467,11 @@
             <p>Для моделей CW-5300, CW-6000, CW-6100, CW-6200 (T-506D, T-506E), CW-6300 (T-804A, T-804B), RMUP-300, RMUP-500 (T-801B) и CWFL-1000, CWFL-1500 (T-607) алгоритм схож, но могут отличаться кнопки навигации и пароли (например, 359 для T-804 и T-801).</p>
             
             <div class="kb-images-grid">
-              <img src="images/1-1.jpg" alt="Фото 1">
-              <img src="images/1-2.jpg" alt="Фото 2">
-              <img src="images/1-3.jpg" alt="Фото 3">
-              <img src="images/1-4.jpg" alt="Фото 4">
-              <img src="images/1-5.jpg" alt="Фото 5">
+              <img src="images/1-1.png" alt="Фото 1">
+              <img src="images/1-2.png" alt="Фото 2">
+              <img src="images/1-3.png" alt="Фото 3">
+              <img src="images/1-4.png" alt="Фото 4">
+              <img src="images/1-5.png" alt="Фото 5">
               <img src="images/1-6.jpg" alt="Фото 6">
             </div>
           </div>
@@ -510,8 +497,8 @@
               <li>Перекос стола или деформация направляющих.</li>
             </ul>
             <div class="kb-images-grid">
-              <img src="images/2-1.jpg" alt="Фото 1">
-              <img src="images/2-2.jpg" alt="Фото 2">
+              <img src="images/2-1.png" alt="Фото 1">
+              <img src="images/2-2.png" alt="Фото 2">
             </div>
           </div>
         </div>
@@ -526,8 +513,8 @@
             <p>Миллиамперметр постоянного тока необходим для измерения силы тока во время работы излучателя. Он устанавливается в <strong>разрыв низковольтного провода</strong>, ведущего от наконечника лазерной трубки к блоку розжига (высоковольтному блоку питания).</p>
             <p>Простой аналоговый миллиамперметр имеет два контакта: один соединяется с отрицательным электродом (катодом) трубки, другой — с отрицательным контактом блока розжига. Если стрелка отклоняется влево (в минус), поменяйте контакты местами.</p>
             <div class="kb-images-grid">
-              <img src="images/3-1.jpg" alt="Фото 1">
-              <img src="images/3-2.jpg" alt="Фото 2">
+              <img src="images/3-1.png" alt="Фото 1">
+              <img src="images/3-2.png" alt="Фото 2">
             </div>
           </div>
         </div>
@@ -542,7 +529,7 @@
             <p>Тубусы лазерных головок рассчитаны под линзы с определенным фокусным расстоянием. Проверить линзу можно так: вертикально поставьте линейку на стол, держите линзу над столом, поднимите фонарик на высоту ~60 см над линзой и перемещайте линзу вверх-вниз.</p>
             <p>Высота от линзы до стола, при которой свет фокусируется в минимальное пятно, и есть фокусное расстояние линзы. При неправильной линзе луч фокусируется некорректно, и часть излучения попадает на сопло, разогревая его.</p>
             <div class="kb-images-grid">
-              <img src="images/4-1.jpg" alt="Фото 1">
+              <img src="images/4-1.png" alt="Фото 1">
             </div>
           </div>
         </div>
@@ -568,7 +555,7 @@
               <li><strong>Нарушение работы вытяжки и обдува:</strong> Скопление продуктов горения снижает мощность.</li>
             </ul>
             <div class="kb-images-grid">
-              <img src="images/5-1.jpg" alt="Фото 1">
+              <img src="images/5-1.png" alt="Фото 1">
             </div>
           </div>
         </div>
@@ -672,11 +659,11 @@
             <p>Стук возникает из-за проскальзывания ремней на шкивах из-за слабого натяжения. Ось X имеет один ремень, ось Y — два.</p>
             <p><strong>Регулировка:</strong> Убедитесь, что портал не перекошен. Натяните ремни (винтами или вручную, в зависимости от модели). Проверьте тестовым резом квадратов и окружностей — если геометрия нарушена, отрегулируйте натяжение сильнее. При сохраняющихся люфтах отрегулируйте эксцентрики (шестигранные гайки на колесах).</p>
             <div class="kb-images-grid">
-              <img src="images/10-1.jpg" alt="Фото 1">
-              <img src="images/10-2.jpg" alt="Фото 2">
-              <img src="images/10-3.jpg" alt="Фото 3">
-              <img src="images/10-4.jpg" alt="Фото 4">
-              <img src="images/10-5.jpg" alt="Фото 5">
+              <img src="images/10-1.png" alt="Фото 1">
+              <img src="images/10-2.png" alt="Фото 2">
+              <img src="images/10-3.png" alt="Фото 3">
+              <img src="images/10-4.png" alt="Фото 4">
+              <img src="images/10-5.png" alt="Фото 5">
             </div>
           </div>
         </div>
@@ -709,7 +696,7 @@
             <p>Блок HY-Z (LaserPWR) подключается к разъему «RTLink» материнской платы RuiDa. Это позволяет отслеживать ток и напряжение на дисплее контроллера, а также видеть ошибки.</p>
             <p>После подключения в программе RDWorks зайдите в «Заводские настройки» (пароль RD8888), нажмите «Считать», в разделе «Лазер» -> «Настройки станка» поставьте галочку «Показать данные с БВН Лазера», нажмите «Записать» и перезагрузите контроллер.</p>
             <div class="kb-images-grid">
-              <img src="images/12-1.jpg" alt="Фото 1">
+              <img src="images/12-1.png" alt="Фото 1">
             </div>
           </div>
         </div>
@@ -723,10 +710,10 @@
           <div class="kb-content">
             <p>Ремни имеют зубчатую поверхность и кордовый сердечник. Из-за износа, натяжения и температуры они растягиваются. Новый ремень будет отличаться по эластичности от старого, что вызовет рассинхронизацию приводов (особенно на осях с двумя ремнями). Поэтому при износе одного ремня меняют весь комплект.</p>
             <div class="kb-images-grid">
-              <img src="images/13-1.jpg" alt="Фото 1">
-              <img src="images/13-2.jpg" alt="Фото 2">
-              <img src="images/13-3.jpg" alt="Фото 3">
-              <img src="images/13-4.jpg" alt="Фото 4">
+              <img src="images/13-1.png" alt="Фото 1">
+              <img src="images/13-2.png" alt="Фото 2">
+              <img src="images/13-3.png" alt="Фото 3">
+              <img src="images/13-4.png" alt="Фото 4">
             </div>
           </div>
         </div>
@@ -778,10 +765,10 @@
             </ul>
             <p><strong>Цифровой миллиамперметр:</strong> Блоки LaserPWR с буквой «A» (TA, XA, ESA) имеют разъем RJ-45 для подключения. Соедините комплектным проводом.</p>
             <div class="kb-images-grid">
-              <img src="images/16-1.jpg" alt="Фото 1">
-              <img src="images/16-2.jpg" alt="Фото 2">
-              <img src="images/16-3.jpg" alt="Фото 3">
-              <img src="images/16-4.jpg" alt="Фото 4">
+              <img src="images/16-1.png" alt="Фото 1">
+              <img src="images/16-2.png" alt="Фото 2">
+              <img src="images/16-3.png" alt="Фото 3">
+              <img src="images/16-4.png" alt="Фото 4">
             </div>
           </div>
         </div>
@@ -871,19 +858,18 @@
 
       <div class="about-title" style="font-size: 15px; margin-top: 20px;">📸 Рабочие моменты</div>
       
-      <!-- Обновленная галерея с вашими фото из папки images -->
       <div class="gallery">
         <div class="gallery-item">
-          <img src="images/about-1.jpg" alt="Настройка станка">
+          <img src="images/photo1.jpg" alt="Настройка станка">
         </div>
         <div class="gallery-item">
-          <img src="images/about-2.jpg" alt="Станкокомплект Axiom">
+          <img src="images/photo2.jpg" alt="Станкокомплект Axiom">
         </div>
         <div class="gallery-item">
-          <img src="images/about-3.jpg" alt="Процесс наладки">
+          <img src="images/photo3.jpg" alt="Процесс наладки">
         </div>
         <div class="gallery-item">
-          <img src="images/about-4.jpg" alt="Работа с контроллером">
+          <img src="images/photo4.jpg" alt="Работа с контроллером">
         </div>
       </div>
     </div>
