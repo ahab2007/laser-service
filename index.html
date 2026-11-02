@@ -12,7 +12,7 @@
     --bg: #0a0a0c;
     --card: #121216;
     --line: #24242c;
-    --accent: #9090e8; /* Лавандовый акцент */
+    --accent: #9090e8; 
     --accent-dim: rgba(144, 144, 232, 0.12); 
     --text: #e8e8ec;
     --muted: #7a7a88;
@@ -65,22 +65,72 @@
     50%      { opacity: 0.8; transform: translate(-50%, -50%) scale(1.15); }
   }
 
+  .site-wrapper {
+    display: flex;
+    position: relative;
+    max-width: 800px;
+    width: 100%;
+    justify-content: center;
+    animation: cardIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+    margin-right: 60px;
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(24px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .notebook-tabs {
+    position: absolute;
+    right: -60px;
+    top: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 2;
+  }
+
+  .tab {
+    width: 55px;
+    height: 120px;
+    border-radius: 0 16px 16px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 4px 4px 15px rgba(0,0,0,0.5);
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-left: none;
+  }
+
+  .tab:hover { transform: translateX(5px); }
+  .tab.active { transform: translateX(-15px) scale(1.05); box-shadow: -5px 0 20px rgba(144, 144, 232, 0.3); }
+
+  .tab span {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    color: #0a0a0c;
+    font-weight: 800;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  .tab-home { background-color: #e8e8ec; }
+  .tab-about { background-color: #9090e8; }
+  .tab-about span { color: #fff; }
+
   .card {
     position: relative;
     z-index: 1;
     background: var(--card);
     border: 1px solid var(--line);
     border-radius: 16px;
-    max-width: 440px;
     width: 100%;
     padding: 40px 32px 32px;
-    animation: cardIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
     overflow: hidden;
-  }
-
-  @keyframes cardIn {
-    from { opacity: 0; transform: translateY(24px) scale(0.98); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
   }
 
   .card::before {
@@ -105,8 +155,7 @@
     display: flex;
     align-items: center;
     gap: 16px;
-    margin-bottom: 20px; 
-    animation: fadeUp 0.7s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+    margin-bottom: 20px;
   }
 
   .logo {
@@ -131,394 +180,395 @@
     stroke-linejoin: round;
   }
 
-  .logo::after {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: 12px;
-    box-shadow: 0 0 0 0 var(--accent-dim);
-    animation: logoPulse 3s ease-in-out infinite;
-  }
+  .title { font-size: 19px; font-weight: 600; letter-spacing: -0.2px; line-height: 1.3; }
+  .subtitle { font-size: 12px; color: var(--accent); text-transform: uppercase; letter-spacing: 1.6px; margin-top: 4px; font-weight: 500; }
+  .desc { color: var(--muted); font-size: 14px; line-height: 1.65; margin-bottom: 20px; }
 
-  @keyframes logoPulse {
-    0%, 100% { box-shadow: 0 0 0 0 var(--accent-dim); }
-    50%      { box-shadow: 0 0 0 6px transparent; }
-  }
-
-  .title {
-    font-size: 19px;
-    font-weight: 600;
-    letter-spacing: -0.2px;
-    line-height: 1.3;
-  }
-
-  .subtitle {
-    font-size: 12px;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 1.6px;
-    margin-top: 4px;
-    font-weight: 500;
-  }
-
-  .desc {
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.65;
-    margin-bottom: 20px;
-    animation: fadeUp 0.7s 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-
-  .services {
-    list-style: none;
-    margin-bottom: 22px;
-    display: grid;
-    gap: 10px;
-  }
-
-  .services li {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 14px;
-    color: var(--text);
-    padding: 11px 14px;
-    background: #0e0e12;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    transition: border-color 0.3s, background 0.3s, transform 0.3s;
-    animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-
-  .services li:nth-child(1) { animation-delay: 0.35s; }
-  .services li:nth-child(2) { animation-delay: 0.45s; }
-  .services li:nth-child(3) { animation-delay: 0.55s; }
-
-  .services li:hover {
-    border-color: var(--accent);
-    background: #101418;
-    transform: translateX(4px);
-  }
-
-  .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    flex-shrink: 0;
-    box-shadow: 0 0 8px var(--accent);
-    animation: dotBlink 2s ease-in-out infinite;
-  }
-
-  .services li:nth-child(2) .dot { animation-delay: 0.6s; }
-  .services li:nth-child(3) .dot { animation-delay: 1.2s; }
-
-  @keyframes dotBlink {
-    0%, 100% { opacity: 1; }
-    50%      { opacity: 0.3; }
-  }
-
-  .contacts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 24px;
-    animation: fadeUp 0.7s 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-
-  .contacts a {
-    flex: 1 1 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 11px 14px;
-    font-size: 13px;
-    color: var(--muted);
-    text-decoration: none;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    transition: color 0.3s, border-color 0.3s, background 0.3s;
-    white-space: nowrap;
-  }
-
-  .contacts a:hover {
-    color: var(--accent);
-    border-color: var(--accent);
-    background: var(--accent-dim);
-  }
-
-  .contacts svg {
-    width: 15px;
-    height: 15px;
-    stroke: currentColor;
-    fill: none;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    flex-shrink: 0;
-  }
-
-  /* Вкладки */
-  .tabs {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 16px;
-    animation: fadeUp 0.7s 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-
-  .tab-btn {
-    flex: 1;
-    padding: 10px;
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 600;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s, color 0.3s, border-color 0.3s;
-    background: #1a1a20;
-    color: var(--muted);
-    border: 1px solid var(--line);
-  }
-
-  .tab-btn.active {
-    background: var(--accent);
-    color: #0a0a0c; 
-    border-color: var(--accent);
-  }
-
-  /* Формы */
-  .contact-form {
-    display: grid;
-    gap: 10px;
-    margin-bottom: 4px;
-    animation: fadeUp 0.7s 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-
-  /* Подсказка о регионах работы */
-  .region-hint {
-    font-size: 12px;
-    color: var(--accent);
-    text-align: center;
-    margin-bottom: 6px;
-    background: var(--accent-dim);
-    padding: 8px;
-    border-radius: 6px;
-    border: 1px dashed rgba(144, 144, 232, 0.4);
-  }
-
-  .contact-form input,
-  .contact-form textarea {
-    width: 100%;
-    padding: 12px 14px;
-    background: #0e0e12;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    color: var(--text);
-    font-family: inherit;
-    font-size: 14px;
-    transition: border-color 0.3s, box-shadow 0.3s;
-  }
-
-  /* Красивое отображение календаря */
-  .contact-form input[type="date"] {
-    color-scheme: dark; /* Делает иконку календаря белой */
-  }
-
-  .contact-form input:focus,
-  .contact-form textarea:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px var(--accent-dim);
-  }
-
-  .contact-form input::placeholder,
-  .contact-form textarea::placeholder {
-    color: #55555f;
-  }
-
-  .contact-form textarea {
-    resize: vertical;
-    min-height: 60px;
-  }
-
-  .btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    padding: 14px;
-    background: var(--accent);
-    color: #0a0a0c; 
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-    text-decoration: none;
-    border: none;
-    border-radius: 10px;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    transition: box-shadow 0.3s, transform 0.2s, opacity 0.3s;
-    margin-top: 5px;
-  }
-
-  .btn:hover:not(:disabled) {
-    box-shadow: 0 0 24px rgba(144, 144, 232, 0.5);
-    transform: translateY(-1px);
-  }
-
-  .btn:active:not(:disabled) { transform: translateY(0) scale(0.99); }
-
-  .btn:disabled {
-    opacity: 0.6;
-    cursor: wait;
-  }
-
-  .btn::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.4), transparent);
-    animation: shine 3.5s ease-in-out infinite;
-  }
-
-  @keyframes shine {
-    0%        { left: -100%; }
-    40%, 100% { left: 130%; }
-  }
-
-  .form-status {
-    font-size: 13px;
-    text-align: center;
-    margin-top: 10px;
-    min-height: 20px;
-    transition: color 0.3s;
-  }
+  .page-content { display: none; animation: fadeUp 0.5s ease; }
+  .page-content.active { display: block; }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  @media (max-width: 480px) {
-    .card { padding: 32px 22px 24px; }
-    .title { font-size: 17px; }
-    .contacts a { flex: 1 1 100%; }
+  .services { list-style: none; margin-bottom: 22px; display: grid; gap: 10px; }
+  .services li {
+    display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--text);
+    padding: 11px 14px; background: #0e0e12; border: 1px solid var(--line); border-radius: 10px;
+    transition: border-color 0.3s;
+  }
+  .services li:hover { border-color: var(--accent); }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; box-shadow: 0 0 8px var(--accent); }
+  
+  .contacts { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+  .contacts a {
+    flex: 1 1 auto; display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 11px 14px; font-size: 13px; color: var(--muted); text-decoration: none;
+    border: 1px solid var(--line); border-radius: 10px; transition: all 0.3s;
+  }
+  .contacts a:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+  .contacts svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+
+  .tabs { display: flex; gap: 10px; margin-bottom: 16px; }
+  .tab-btn {
+    flex: 1; padding: 10px; font-family: inherit; font-size: 13px; font-weight: 600;
+    border-radius: 8px; cursor: pointer; background: #1a1a20; color: var(--muted);
+    border: 1px solid var(--line); transition: all 0.3s;
+  }
+  .tab-btn.active { background: var(--accent); color: #0a0a0c; border-color: var(--accent); }
+
+  .contact-form { display: grid; gap: 10px; }
+  .region-hint {
+    font-size: 12px; color: var(--accent); text-align: center; margin-bottom: 6px;
+    background: var(--accent-dim); padding: 8px; border-radius: 6px; border: 1px dashed rgba(144, 144, 232, 0.4);
+  }
+  .contact-form input, .contact-form textarea {
+    width: 100%; padding: 12px 14px; background: #0e0e12; border: 1px solid var(--line);
+    border-radius: 8px; color: var(--text); font-family: inherit; font-size: 14px;
+    transition: border-color 0.3s;
+  }
+  .contact-form input[type="date"] { color-scheme: dark; }
+  .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent); }
+  .contact-form textarea { resize: vertical; min-height: 60px; }
+
+  .btn {
+    display: flex; align-items: center; justify-content: center; width: 100%; padding: 14px;
+    background: var(--accent); color: #0a0a0c; font-family: inherit; font-size: 14px;
+    font-weight: 600; border: none; border-radius: 10px; cursor: pointer; margin-top: 5px;
+    transition: box-shadow 0.3s, transform 0.2s;
+  }
+  .btn:hover:not(:disabled) { box-shadow: 0 0 24px rgba(144, 144, 232, 0.5); transform: translateY(-1px); }
+  .btn:disabled { opacity: 0.6; cursor: wait; }
+  .form-status { font-size: 13px; text-align: center; margin-top: 10px; min-height: 20px; }
+
+  /* ================= СТИЛИ О НАС ================= */
+  .about-title { font-size: 18px; font-weight: 800; margin-bottom: 12px; color: var(--text); letter-spacing: -0.3px;}
+  .about-text { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 16px; }
+  .about-text strong { color: var(--text); }
+  .about-text a { color: var(--accent); text-decoration: none; font-weight: 600; transition: opacity 0.2s; }
+  .about-text a:hover { opacity: 0.8; text-decoration: underline; }
+  
+  .achievement-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+  .achievement-card {
+    background: #0e0e12;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px;
+    transition: border-color 0.3s;
+  }
+  .achievement-card:hover { border-color: var(--accent); }
+  .achievement-icon { font-size: 20px; margin-bottom: 8px; }
+  .achievement-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .achievement-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  .course-box {
+    background: linear-gradient(135deg, rgba(144, 144, 232, 0.1), rgba(144, 144, 232, 0.02));
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+  }
+  .course-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 4px; height: 100%;
+    background: var(--accent);
+  }
+  .course-box .about-title { color: var(--accent); font-size: 16px; margin-bottom: 8px; }
+  .course-tags { display: flex; gap: 8px; margin-top: 15px; flex-wrap: wrap; }
+  .course-tag {
+    background: #0a0a0c;
+    border: 1px solid var(--line);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text);
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation: none !important; transition: none !important; }
+  /* Галерея с реальными фото */
+  .gallery { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 15px; 
+    margin-top: 15px; 
+  }
+  
+  .gallery-item {
+    background: #0e0e12; 
+    border: 1px solid var(--line); 
+    border-radius: 10px;
+    height: 220px; 
+    overflow: hidden; 
+    position: relative;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: zoom-in; /* Курсор для лайтбокса */
+  }
+  
+  .gallery-item:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  /* ================= СТИЛИ ЛАЙТБОКСА ================= */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    padding: 20px;
+    cursor: zoom-out;
+    animation: fadeUp 0.25s ease;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 12px;
+    box-shadow: 0 0 40px rgba(144,144,232,0.35);
+    object-fit: contain;
+  }
+
+  @media (max-width: 900px) {
+    .site-wrapper { flex-direction: column; max-width: 440px; margin-right: 0; }
+    .notebook-tabs { position: relative; right: 0; top: 0; flex-direction: row; justify-content: center; margin-bottom: 10px; gap: 10px; }
+    .tab { width: auto; height: auto; flex: 1; border-radius: 10px 10px 0 0; padding: 12px 10px; box-shadow: 0 -2px 10px rgba(0,0,0,0.3); }
+    .tab span { writing-mode: horizontal-tb; transform: none; font-size: 13px; }
+    .tab.active { transform: translateY(5px) scale(1.02); box-shadow: 0 5px 15px rgba(144,144,232,0.2); }
+    .card { padding: 30px 22px 24px; }
+    .gallery { grid-template-columns: 1fr; }
+    .gallery-item { height: 250px; }
+    .achievement-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
-<div class="card">
+<div class="site-wrapper">
 
-  <div class="header">
-    <div class="logo">
-      <svg viewBox="0 0 24 24">
-        <path d="M12 2v6"/>
-        <path d="M8 8h8l2 5H6l2-5z"/>
-        <path d="M12 13v4"/>
-        <path d="M4 21h16"/>
-        <path d="M12 17v4"/>
-      </svg>
+  <div class="notebook-tabs">
+    <div class="tab tab-home active" data-target="page-home">
+      <span>Услуги</span>
     </div>
-    <div>
-      <h1 class="title">Пусконаладка CO₂ лазеров</h1>
-      <p class="subtitle">Сервис · Настройка · Обучение</p>
+    <div class="tab tab-about" data-target="page-about">
+      <span>О нас</span>
     </div>
   </div>
 
-  <p class="desc">
-    Профессиональный запуск и настройка CO₂-лазерных станков
-    резки и гравировки. Точная юстировка оптики, калибровка
-    мощности и вывод оборудования на стабильный режим работы.
-  </p>
+  <div class="card">
+    
+    <!-- ГЛАВНАЯ СТРАНИЦА -->
+    <div id="page-home" class="page-content active">
+      <div class="header">
+        <div class="logo">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2v6"/><path d="M8 8h8l2 5H6l2-5z"/><path d="M12 13v4"/><path d="M4 21h16"/><path d="M12 17v4"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="title">Пусконаладка CO₂ лазеров</h1>
+          <p class="subtitle">Сервис · Настройка · Обучение</p>
+        </div>
+      </div>
 
-  <ul class="services">
-    <li><span class="dot"></span> Юстировка и настройка оптического тракта</li>
-    <li><span class="dot"></span> Калибровка мощности и режимов резки</li>
-    <li><span class="dot"></span> Обучение операторов и техподдержка</li>
-  </ul>
+      <p class="desc">
+        Профессиональный запуск и настройка CO₂-лазерных станков
+        резки и гравировки. Точная юстировка оптики, калибровка
+        мощности и вывод оборудования на стабильный режим работы.
+      </p>
 
-  <div class="contacts">
-    <a href="tel:+79520976060">
-      <svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>
-      +7 (952) 097-60-60
-    </a>
-    <a href="mailto:site@co-2-service.ru">
-      <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
-      site@co-2-service.ru
-    </a>
+      <ul class="services">
+        <li><span class="dot"></span> Юстировка и настройка оптического тракта</li>
+        <li><span class="dot"></span> Калибровка мощности и режимов резки</li>
+        <li><span class="dot"></span> Обучение операторов и техподдержка</li>
+      </ul>
+
+      <div class="contacts">
+        <a href="tel:+79520976060">
+          <svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>
+          +7 (952) 097-60-60
+        </a>
+        <a href="mailto:site@co-2-service.ru">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          site@co-2-service.ru
+        </a>
+      </div>
+
+      <div class="tabs">
+        <button type="button" class="tab-btn active" data-tab="request">Заявка</button>
+        <button type="button" class="tab-btn" data-tab="callback">Обратный звонок</button>
+      </div>
+
+      <form id="form-request" class="contact-form">
+        <input type="hidden" name="form_type" value="Заявка на пусконаладку">
+        <input type="hidden" name="to_email" value="site@co-2-service.ru">
+        
+        <div class="region-hint">📍 Работаем по Санкт-Петербургу и Ленинградской области</div>
+    
+        <input type="text" name="name" placeholder="Ваше имя" required>
+        <input type="tel" name="phone" placeholder="Телефон" required>
+        <input type="email" name="email" placeholder="Электронная почта (необязательно)">
+        
+        <input type="text" name="city" placeholder="Населённый пункт" required>
+        <input type="text" name="address" placeholder="Адрес (улица, дом/цех)" required>
+        <input type="text" name="date" placeholder="Желаемая дата приезда" onfocus="(this.type='date')" onblur="(this.type='text')" required>
+
+        <textarea name="message" placeholder="Опишите задачу (станок, модель, проблема)" rows="2"></textarea>
+        <button type="submit" class="btn">Отправить заявку</button>
+      </form>
+
+      <form id="form-callback" class="contact-form" style="display: none;">
+        <input type="hidden" name="form_type" value="Запрос обратного звонка">
+        <input type="hidden" name="to_email" value="site@co-2-service.ru">
+        <input type="hidden" name="message" value="Клиент просит перезвонить">
+        <input type="hidden" name="email" value="Не указана">
+        <input type="hidden" name="city" value="Не указан">
+        <input type="hidden" name="address" value="Не указан">
+        <input type="hidden" name="date" value="Не указана">
+        
+        <input type="text" name="name" placeholder="Ваше имя" required>
+        <input type="tel" name="phone" placeholder="Телефон для звонка" required>
+        <button type="submit" class="btn">Жду звонка</button>
+      </form>
+
+      <p id="form-status" class="form-status"></p>
+    </div>
+
+    <!-- СТРАНИЦА О НАС -->
+    <div id="page-about" class="page-content">
+      <div class="header">
+        <div class="logo">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="title">Обо мне</h1>
+          <p class="subtitle">Инженер · Разработчик · Эксперт</p>
+        </div>
+      </div>
+
+      <div class="about-title">Приветствую! Меня зовут Максим</div>
+      
+      <p class="about-text">
+        Я — <strong>ведущий инженер компании <a href="https://torden.ru" target="_blank">Torden</a></strong>, где занимаюсь решением сложных технических задач, проектированием и настройкой промышленного лазерного оборудования. 
+      </p>
+      
+      <p class="about-text">
+        Также я являюсь <strong>создателем станкокомплекта Axiom</strong> — решения, которое помогает вывести производство на новый уровень. 
+      </p>
+
+      <div class="achievement-grid">
+        <div class="achievement-card">
+          <div class="achievement-icon">⚙️</div>
+          <div class="achievement-title">Ведущий инженер</div>
+          <div class="achievement-desc">Опыт решения нестандартных задач в Torden (torden.ru).</div>
+        </div>
+        <div class="achievement-card">
+          <div class="achievement-icon">🚀</div>
+          <div class="achievement-title">Создатель Axiom</div>
+          <div class="achievement-desc">Разработка и внедрение станкокомплекта Axiom.</div>
+        </div>
+      </div>
+
+      <p class="about-text">
+        Сейчас я запускаю свой отдельный проект — профессиональную пусконаладку CO₂-лазерных станков в Санкт-Петербурге и Ленинградской области. Моя цель — сделать так, чтобы ваше оборудование работало идеально с первого дня.
+      </p>
+
+      <div class="course-box">
+        <div class="about-title">🎓 Авторский видеокурс по ремонту</div>
+        <p class="about-text" style="color: var(--text); margin-bottom: 10px;">
+          Параллельно я записываю масштабный цикл обучающих роликов. От простой юстировки до ремонта и диагностики высоковольтных блоков розжига.
+        </p>
+        <p class="about-text" style="margin-bottom: 0;">
+          Этот курс создан специально для инженеров из дальних регионов, где я не могу провести обучение физически. 
+          Платформы: Boosty и Patreon.
+        </p>
+        <div class="course-tags">
+          <span class="course-tag">Boosty</span>
+          <span class="course-tag">Patreon</span>
+          <span class="course-tag">Обучение</span>
+          <span class="course-tag">Ремонт электроники</span>
+        </div>
+      </div>
+
+      <div class="about-title" style="font-size: 15px; margin-top: 20px;">📸 Рабочие моменты</div>
+      <div class="gallery">
+        <!-- Фото 1 (с ноутбуком у станка) -->
+        <div class="gallery-item">
+          <img src="images/photo1.jpg" alt="Настройка станка с ноутбуком" loading="lazy">
+        </div>
+        <!-- Фото 2 (с ноутбуком втроем) -->
+        <div class="gallery-item">
+          <img src="images/photo2.jpg" alt="Обсуждение настроек" loading="lazy">
+        </div>
+        <!-- Фото 3 (на фоне Axiom) -->
+        <div class="gallery-item">
+          <img src="images/photo3.jpg" alt="Станкокомплект Axiom" loading="lazy">
+        </div>
+        <!-- Фото 4 (открытая крышка станка) -->
+        <div class="gallery-item">
+          <img src="images/photo4.jpg" alt="Юстировка оптики" loading="lazy">
+        </div>
+      </div>
+    </div>
+
   </div>
+</div>
 
-  <div class="tabs">
-    <button type="button" class="tab-btn active" data-tab="request">Заявка</button>
-    <button type="button" class="tab-btn" data-tab="callback">Обратный звонок</button>
-  </div>
-
-  <!-- Форма заявки -->
-  <form id="form-request" class="contact-form">
-    <input type="hidden" name="form_type" value="Заявка на пусконаладку">
-    <input type="hidden" name="to_email" value="site@co-2-service.ru">
-    
-    <div class="region-hint">📍 Работаем по Санкт-Петербургу и Ленинградской области</div>
-
-    <input type="text" name="name" placeholder="Ваше имя" required>
-    <input type="tel" name="phone" placeholder="Телефон" required>
-    <input type="email" name="email" placeholder="Электронная почта (необязательно)">
-    
-    <input type="text" name="city" placeholder="Населённый пункт" required>
-    <input type="text" name="address" placeholder="Адрес (улица, дом/цех)" required>
-    
-    <!-- Поле даты -->
-    <input type="text" name="date" placeholder="Желаемая дата приезда" onfocus="(this.type='date')" onblur="(this.type='text')" required>
-
-    <textarea name="message" placeholder="Опишите задачу (станок, модель, проблема)" rows="2"></textarea>
-    <button type="submit" class="btn">Отправить заявку</button>
-  </form>
-
-  <!-- Форма обратного звонка -->
-  <form id="form-callback" class="contact-form" style="display: none;">
-    <input type="hidden" name="form_type" value="Запрос обратного звонка">
-    <input type="hidden" name="to_email" value="site@co-2-service.ru">
-    <input type="hidden" name="message" value="Клиент просит перезвонить">
-    <input type="hidden" name="email" value="Не указана">
-    <input type="hidden" name="city" value="Не указан">
-    <input type="hidden" name="address" value="Не указан">
-    <input type="hidden" name="date" value="Не указана">
-    
-    <input type="text" name="name" placeholder="Ваше имя" required>
-    <input type="tel" name="phone" placeholder="Телефон для звонка" required>
-    <button type="submit" class="btn">Жду звонка</button>
-  </form>
-
-  <p id="form-status" class="form-status"></p>
-
+<!-- Лайтбокс для увеличения фото -->
+<div class="lightbox" id="lightbox">
+  <img src="" alt="Просмотр фото">
 </div>
 
 <script>
-  emailjs.init("ouBg_eyDA9g5EEWYU");
+  // Переключение вкладок (Услуги / О нас)
+  const tabs = document.querySelectorAll('.tab');
+  const pages = document.querySelectorAll('.page-content');
 
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      pages.forEach(p => p.classList.remove('active'));
+      const targetId = tab.getAttribute('data-target');
+      document.getElementById(targetId).classList.add('active');
+    });
+  });
+
+  // EmailJS
+  emailjs.init("ouBg_eyDA9g5EEWYU");
   const SERVICE_ID  = "service_6c3u9bo";
   const TEMPLATE_ID = "template_kyd08dh";
 
-  const tabs = document.querySelectorAll('.tab-btn');
+  const formTabs = document.querySelectorAll('.tab-btn');
   const formRequest  = document.getElementById('form-request');
   const formCallback = document.getElementById('form-callback');
   const statusEl     = document.getElementById('form-status');
 
-  tabs.forEach(btn => {
+  formTabs.forEach(btn => {
     btn.addEventListener('click', () => {
-      tabs.forEach(b => b.classList.remove('active'));
+      formTabs.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
       const tab = btn.dataset.tab;
@@ -561,6 +611,32 @@
 
   formRequest.addEventListener('submit', handleSubmit);
   formCallback.addEventListener('submit', handleSubmit);
+
+  // Лайтбокс (увеличение фото)
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = lightbox.querySelector('img');
+
+  document.querySelectorAll('.gallery-item img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('open');
+    });
+  });
+
+  // Закрытие по клику
+  lightbox.addEventListener('click', () => {
+    lightbox.classList.remove('open');
+    lightboxImg.src = '';
+  });
+
+  // Закрытие по Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && lightbox.classList.contains('open')) {
+      lightbox.classList.remove('open');
+      lightboxImg.src = '';
+    }
+  });
 </script>
 
 </body>
