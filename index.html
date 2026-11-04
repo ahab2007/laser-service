@@ -18,6 +18,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Пусконаладка CO₂ лазерных станков</title>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+  import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAMcMCcxvBnFzMdHlrqOzRW_hz5JBIUIkU",
+    authDomain: "co2-service-reviews.firebaseapp.com",
+    projectId: "co2-service-reviews",
+    storageBucket: "co2-service-reviews.firebasestorage.app",
+    messagingSenderId: "634769823790",
+    appId: "1:634769823790:web:cb54d55ba34d32716627bf",
+    measurementId: "G-66J0DBTCR2"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  window.db = db;
+  window.collection = collection;
+  window.addDoc = addDoc;
+  window.onSnapshot = onSnapshot;
+  window.deleteDoc = deleteDoc;
+  window.doc = doc;
+  window.query = query;
+  window.orderBy = orderBy;
+
+  window.dispatchEvent(new Event('firebase-ready'));
+</script>
+
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -134,6 +165,7 @@
   .tab-home { background-color: #e8e8ec; }
   .tab-knowledge { background-color: #59596a; }
   .tab-knowledge span { color: #fff; }
+  .tab-reviews { background-color: #b5b5c5; }
   .tab-about { background-color: #9090e8; }
   .tab-about span { color: #fff; }
 
@@ -333,6 +365,80 @@
 
   .kb-images-grid img:hover { opacity: 0.9; cursor: zoom-in; }
 
+  /* ================= СТИЛИ ОТЗЫВОВ ================= */
+  .reviews-list {
+    display: grid;
+    gap: 15px;
+    margin-bottom: 25px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 5px;
+  }
+  
+  .review-card {
+    background: #0e0e12;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 15px;
+    position: relative;
+  }
+
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .review-name {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  .review-stars {
+    color: #ffc107;
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+
+  .review-text {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .delete-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #ff6b6b;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    display: none;
+  }
+  
+  .review-card:hover .delete-btn { display: block; }
+
+  .rating-input {
+    display: flex;
+    gap: 5px;
+    font-size: 24px;
+    color: #555;
+    cursor: pointer;
+    margin-bottom: 10px;
+    justify-content: center;
+  }
+  
+  .rating-input span:hover,
+  .rating-input span.active {
+    color: #ffc107;
+    text-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+  }
+
   @media (max-width: 900px) {
     .site-wrapper { flex-direction: column; max-width: 440px; margin-right: 0; }
     .notebook-tabs { position: relative; right: 0; top: 0; flex-direction: row; justify-content: center; margin-bottom: 10px; gap: 10px; }
@@ -355,6 +461,9 @@
     </div>
     <div class="tab tab-knowledge" data-target="page-knowledge">
       <span>База знаний</span>
+    </div>
+    <div class="tab tab-reviews" data-target="page-reviews">
+      <span>Отзывы</span>
     </div>
     <div class="tab tab-about" data-target="page-about">
       <span>О нас</span>
@@ -457,7 +566,6 @@
       <p class="desc">Здесь собраны ответы на самые частые вопросы по настройке, диагностике и ремонту CO₂-лазерных станков.</p>
 
       <div class="kb-accordion">
-        
         <!-- 1 -->
         <div class="kb-item">
           <div class="kb-header">
@@ -813,7 +921,54 @@
       </div>
     </div>
 
-    <!-- СТРАНИЦА 3: О НАС -->
+    <!-- СТРАНИЦА 3: ОТЗЫВЫ -->
+    <div id="page-reviews" class="page-content">
+      <div class="header">
+        <div class="logo">
+          <svg viewBox="0 0 24 24">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="title">Отзывы клиентов</h1>
+          <p class="subtitle">Рейтинг нашего сервиса</p>
+        </div>
+      </div>
+
+      <p class="desc">Мы гордимся своей репутацией. Оставьте свой отзыв о нашей работе — он появится на сайте и поможет нам стать лучше!</p>
+
+      <!-- Форма отзыва -->
+      <div style="background: #0e0e12; border: 1px solid var(--line); border-radius: 12px; padding: 20px; margin-bottom: 25px;">
+        <h3 style="font-size: 15px; margin-bottom: 15px; color: var(--text); text-align: center;">Оставить отзыв</h3>
+        
+        <form id="form-review" class="contact-form">
+          <input type="hidden" name="form_type" value="Новый отзыв">
+          <input type="hidden" name="to_email" value="site@co-2-service.ru">
+          
+          <div class="rating-input" id="star-rating">
+            <span data-value="1">★</span>
+            <span data-value="2">★</span>
+            <span data-value="3">★</span>
+            <span data-value="4">★</span>
+            <span data-value="5">★</span>
+          </div>
+          <input type="hidden" name="rating" id="rating-value" value="5" required>
+
+          <input type="text" name="name" placeholder="Ваше имя" required>
+          <input type="email" name="email" placeholder="Ваша почта (не публикуется)" required>
+          <textarea name="message" placeholder="Ваш отзыв" rows="3" required></textarea>
+          <button type="submit" class="btn" id="review-submit-btn">Опубликовать отзыв</button>
+        </form>
+        <p id="review-status" class="form-status"></p>
+      </div>
+
+      <!-- Лента отзывов -->
+      <div class="reviews-list" id="reviews-container">
+        <p style="text-align: center; color: var(--muted); font-size: 13px;">Загрузка отзывов...</p>
+      </div>
+    </div>
+
+    <!-- СТРАНИЦА 4: О НАС -->
     <div id="page-about" class="page-content">
       <div class="header">
         <div class="logo">
@@ -953,7 +1108,6 @@
     try {
       await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form);
       
-      // Отправка события в Яндекс Метрику (Цель: form-sent)
       if (typeof ym === 'function') {
         ym(114050606, 'reachGoal', 'form-sent');
       }
@@ -975,6 +1129,123 @@
 
   formRequest.addEventListener('submit', handleSubmit);
   formCallback.addEventListener('submit', handleSubmit);
+
+  // ================= ЛОГИКА ОТЗЫВОВ С FIREBASE =================
+
+  const stars = document.querySelectorAll('#star-rating span');
+  const ratingInput = document.getElementById('rating-value');
+  const reviewForm = document.getElementById('form-review');
+  const reviewStatus = document.getElementById('review-status');
+  const reviewsContainer = document.getElementById('reviews-container');
+  const reviewBtn = document.getElementById('review-submit-btn');
+
+  // Логика звездочек
+  stars.forEach(star => {
+    star.addEventListener('click', () => {
+      const value = star.getAttribute('data-value');
+      ratingInput.value = value;
+      stars.forEach(s => s.classList.remove('active'));
+      stars.forEach(s => {
+        if (s.getAttribute('data-value') <= value) {
+          s.classList.add('active');
+        }
+      });
+    });
+  });
+  stars.forEach(s => s.classList.add('active'));
+
+  // Ждем загрузки Firebase
+  window.addEventListener('firebase-ready', () => {
+    
+    // 1. Загружаем отзывы
+    const q = window.query(window.collection(window.db, "reviews"), window.orderBy("timestamp", "desc"));
+    
+    window.onSnapshot(q, (snapshot) => {
+      reviewsContainer.innerHTML = '';
+      
+      if (snapshot.empty) {
+        reviewsContainer.innerHTML = '<p style="text-align: center; color: var(--muted); font-size: 13px;">Пока нет отзывов. Будьте первым!</p>';
+        return;
+      }
+
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        const starsString = '★'.repeat(data.rating) + '☆'.repeat(5 - data.rating);
+        
+        const reviewCard = document.createElement('div');
+        reviewCard.className = 'review-card';
+        reviewCard.innerHTML = `
+          <button class="delete-btn" data-id="${doc.id}" title="Удалить отзыв">×</button>
+          <div class="review-header">
+            <span class="review-name">${data.name}</span>
+            <span class="review-stars">${starsString}</span>
+          </div>
+          <p class="review-text">${data.message}</p>
+        `;
+        reviewsContainer.appendChild(reviewCard);
+      });
+    });
+
+    // 2. Отправка нового отзыва
+    reviewForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const originalText = reviewBtn.textContent;
+      reviewBtn.disabled = true;
+      reviewBtn.textContent = 'Отправка...';
+      reviewStatus.textContent = '';
+
+      const name = reviewForm.querySelector('input[name="name"]').value;
+      const email = reviewForm.querySelector('input[name="email"]').value;
+      const message = reviewForm.querySelector('textarea[name="message"]').value;
+      const rating = parseInt(ratingInput.value);
+
+      try {
+        await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, reviewForm);
+        
+        await window.addDoc(window.collection(window.db, "reviews"), {
+          name: name,
+          email: email,
+          message: message,
+          rating: rating,
+          timestamp: new Date()
+        });
+
+        if (typeof ym === 'function') {
+          ym(114050606, 'reachGoal', 'review-sent');
+        }
+
+        reviewStatus.textContent = '✅ Спасибо! Ваш отзыв опубликован.';
+        reviewStatus.style.color = 'var(--accent)';
+        reviewForm.reset();
+        stars.forEach(s => s.classList.add('active'));
+        ratingInput.value = 5;
+
+      } catch (err) {
+        console.error('Ошибка:', err);
+        reviewStatus.textContent = '❌ Ошибка отправки. Попробуйте позже.';
+        reviewStatus.style.color = '#ff6b6b';
+      } finally {
+        reviewBtn.disabled = false;
+        reviewBtn.textContent = originalText;
+      }
+    });
+
+    // 3. Удаление отзыва
+    reviewsContainer.addEventListener('click', async (e) => {
+      if (e.target.classList.contains('delete-btn')) {
+        if (confirm('Вы уверены, что хотите удалить этот отзыв?')) {
+          const docId = e.target.getAttribute('data-id');
+          try {
+            await window.deleteDoc(window.doc(window.db, "reviews", docId));
+          } catch (error) {
+            console.error("Ошибка удаления:", error);
+            alert("Не удалось удалить отзыв.");
+          }
+        }
+      }
+    });
+
+  });
 </script>
 
 </body>
